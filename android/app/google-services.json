@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "341118561960",
+    "firebase_url": "https://my-battery-d8509.firebaseio.com",
+    "project_id": "my-battery-d8509",
+    "storage_bucket": "my-battery-d8509.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:341118561960:android:27313f4a976aa2ec37dc9d",
+        "android_client_info": {
+          "package_name": "com.aymansaad.my_battary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "341118561960-v3rtin89enfvvq66fnmijh82s4qqsci6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aymansaad.my_battary",
+            "certificate_hash": "9ad847b394cef760f12ae8e039ae27d59df4acda"
+          }
+        },
+        {
+          "client_id": "341118561960-g2lqr54ir7mh7e19c84s2eefc6mp2bn3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoiRRwMbzLh7d8WPuxfIB3Y8yC7g1O7yY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "341118561960-g2lqr54ir7mh7e19c84s2eefc6mp2bn3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
