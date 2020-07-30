@@ -1,39 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts_arabic/fonts.dart';
+import 'package:my_battary/provider/cart_provider.dart';
+import 'package:my_battary/provider/firebase_auth.dart';
+import 'package:my_battary/screens/Shopping_cart.dart';
+import 'package:my_battary/screens/login.dart';
+import 'package:my_battary/utils/common.dart';
+import 'package:provider/provider.dart';
 
 class SingleProduct extends StatefulWidget {
-  final String name, photoUrl, batterySize, brand;
-  final int price;
+  final String name, photoUrl, batterySize, brand, category;
+  final int price, quantity;
 
   SingleProduct(
-      {this.name, this.photoUrl, this.batterySize, this.brand, this.price});
+      {this.name,
+      this.photoUrl,
+      this.batterySize,
+      this.brand,
+      this.price,
+      this.category,
+      this.quantity});
 
   @override
   _SingleProductState createState() => _SingleProductState();
 }
 
 class _SingleProductState extends State<SingleProduct> {
-  final String fontPack = 'google_fonts_arabic';
-  final String fontFamily = ArabicFonts.Tajawal;
-  final LinearGradient purpleGradient = LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: <Color>[
-        Colors.purple[600],
-        Colors.purple[700],
-        Colors.purple[900]
-      ]);
-  final LinearGradient greyGradient = LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: <Color>[Colors.grey[300], Colors.grey[400]]);
+  Common common;
+  ShoppingCart shoppingCart = new ShoppingCart();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    common = new Common();
+    shoppingCart = new ShoppingCart();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<ShoppingCartProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context);
     return InkWell(
       onTap: () {
         print('card');
       },
       child: Card(
+        clipBehavior: Clip.antiAlias,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        elevation: 5.0,
         child: Column(
           children: <Widget>[
             Expanded(
@@ -41,13 +56,15 @@ class _SingleProductState extends State<SingleProduct> {
               child: Container(
                 alignment: Alignment.center,
                 width: double.infinity,
-                color: widget.batterySize == '10'
-                    ? Colors.yellow[600]
-                    : widget.batterySize == '13'
-                        ? Colors.orange
-                        : widget.batterySize == '312'
-                            ? Colors.brown
-                            : Colors.blue,
+                decoration: BoxDecoration(
+                  gradient: widget.batterySize == '675'
+                      ? common.blueGradient
+                      : widget.batterySize == '312'
+                          ? common.brownGradient
+                          : widget.batterySize == '13'
+                              ? common.orangeGradient
+                              : common.yellowGradient,
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -55,17 +72,20 @@ class _SingleProductState extends State<SingleProduct> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontFamily: fontFamily,
+                        fontFamily: common.fontFamily,
                         fontSize: 20.0,
-                        package: fontPack),
+                        package: common.fontPack),
                   ),
                 ),
               ),
             ),
             Expanded(
-                child: Image.asset(
-              widget.photoUrl,
-              fit: BoxFit.contain,
+                child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Image.asset(
+                widget.photoUrl,
+                fit: BoxFit.contain,
+              ),
             )),
             Container(
               height: 1.0,
@@ -85,7 +105,7 @@ class _SingleProductState extends State<SingleProduct> {
                               color: Colors.black,
                               fontFamily: ArabicFonts.Cairo,
                               fontSize: 20.0,
-                              package: fontPack),
+                              package: common.fontPack),
                         )),
                   ),
                   Container(
@@ -94,14 +114,30 @@ class _SingleProductState extends State<SingleProduct> {
                   ),
                   Expanded(
                     child: Container(
-                      color: Colors.red,
+                      decoration: BoxDecoration(gradient: common.redGradient),
                       child: IconButton(
                           icon: Icon(
                             Icons.add_shopping_cart,
                             color: Colors.white,
                           ),
                           onPressed: () {
-                            print('add to cart');
+                            if (authProvider.user != null) {
+                              cartProvider.addtoCart({
+                                "name": widget.name,
+                                "batterySize": widget.batterySize,
+                                "price": widget.price,
+                                "brand": widget.brand,
+                                "photoUrl": widget.photoUrl,
+                                "category": widget.category,
+                                "quantity": widget.quantity,
+                              });
+                              Fluttertoast.showToast(
+                                  msg: 'تم اضافة البطارية الي القائمة ',
+                                  backgroundColor: Colors.greenAccent,
+                                  textColor: Colors.black);
+                            } else {
+                              changeScreen(context, Login());
+                            }
                           }),
                     ),
                   )
