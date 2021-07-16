@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_battary/provider/cart_provider.dart';
 import 'package:my_battary/provider/firebase_auth.dart';
 import 'package:my_battary/provider/product_provider.dart';
+import 'package:my_battary/screens/home.dart';
 
 import 'package:my_battary/screens/products.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         title: 'My Battery',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.purple,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: Products(),
