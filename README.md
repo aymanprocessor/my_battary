@@ -16,4 +16,5 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 ![Alt text](/lib/screenshots/flutter_01.png?raw=true "Optional Title")
-<img src="/lib/screenshots/flutter_01.png" alt="drawing" width="200"/>
+<img src="/lib/screenshots/flutter_01.png" alt="drawing" width="300"/>
+<img src="/lib/screenshots/flutter_01.png" alt="drawing" width="300"/>
