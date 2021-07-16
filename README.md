@@ -1,4 +1,4 @@
-# My Battery <img src="/icons/battery.png" alt="drawing" width="50"/>
+# My Battery <img src="/icons/battery.png" alt="drawing" width="20"/>
 Store Mobile Application For Hear Aids Battery 
 
 ## Screenshots
